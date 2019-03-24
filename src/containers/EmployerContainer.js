@@ -1,12 +1,24 @@
 
 import React, { Component } from 'react';
 import FeatureCard from '../components/sharedComponent/FeatureCard';
+import PostNewJob from '../components/employerComponents/PostNewJob';
 
 
 export default class EmployerContainer extends Component {
 
+    state={
+        postNewJob:false
+    }
+
     featureOnClickHandler=(e)=>{
         console.log(e.target);
+    }
+
+    postNewJobHandler=()=>{
+        console.log(this.state);
+        this.setState({
+            postNewJob:true
+        })
     }
 
     renderCards=(feature) => {
@@ -44,13 +56,15 @@ export default class EmployerContainer extends Component {
                     {this.renderFeatureCards("first")}
                 </div>
 
-                <div className="row mb-2">
+                <div className="row mb-2" onClick={this.postNewJobHandler}>
                     {this.renderFeatureCards("second")}
                 </div>
 
                 <div className="row mb-2">
                     {this.renderFeatureCards("third")}
                 </div>
+
+                {this.state.postNewJob ? <PostNewJob/> : null}
                 
              </div>
         );

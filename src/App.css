@@ -8,3 +8,7 @@ a.card:hover{
   text-decoration: none;
   border-color: black;
 }
+
+.post-new-job .col-xs-12{
+  vertical-align: middle;
+}
