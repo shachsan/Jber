@@ -27,8 +27,13 @@ class PostNewJob extends Component {
             keyArr:[],
             keyIdx:0
         }
+
+        // formHandler=(e)=>{
+        //     console.log(e.target.value);
+        // }
         
-        nextQuesHandler=()=>{
+        nextQuesHandler=(formInput)=>{
+            console.log('My input',formInput);
             const newKeyIdx={...this.state}.keyIdx+1;
             this.setState({
                 keyIdx:newKeyIdx,
@@ -56,8 +61,8 @@ class PostNewJob extends Component {
                     <form>
                         <JobDetails key={this.state.quesIdx} detail={this.state.jobQuesProps[this.state.quesKey]}
                                     nextQuesHandler={this.nextQuesHandler} quesKey={this.state.quesKey}
-                                    categories={this.state.quesKey==='category' ? this.props.jobQuestions.jobCategories:null}/>
-
+                                    categories={this.state.quesKey==='category' ? this.props.jobQuestions.jobCategories:null}
+                                    />
                     </form>
                 </div>
              </div>
