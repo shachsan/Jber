@@ -25,20 +25,57 @@ class PostNewJob extends Component {
             quesKey:'jobTitle',
             jobQuesProps:{},
             keyArr:[],
-            keyIdx:0
+            keyIdx:0,
+            newJobPostSum:{
+                jobTitle:'',
+                description:'',
+                category:'',
+                payRate:'',
+                workHours:'',
+                expectCompTime:'',
+                screen:null,
+            }
         }
 
         // formHandler=(e)=>{
         //     console.log(e.target.value);
         // }
+
+        inputHandler=(e)=>{
+            let copyJobSum={...this.state.newJobPostSum}
+                copyJobSum[e.target.name]=e.target.value
+            this.setState({
+                newJobPostSum:copyJobSum,
+            })
+        }
         
-        nextQuesHandler=(formInput)=>{
-            console.log('My input',formInput);
+        nextQuesHandler=()=>{
+            
+            // console.log('My input',formInput);
             const newKeyIdx={...this.state}.keyIdx+1;
             this.setState({
                 keyIdx:newKeyIdx,
-                quesKey:this.state.keyArr[newKeyIdx]
+                quesKey:this.state.keyArr[newKeyIdx],
             })
+        }
+
+        renderJobSummary=()=>{
+            let jobSum={...this.state.newJobPostSum}
+            return(
+                <div className="card">
+                    <div className="card-body">
+                        <h5>{jobSum.jobTitle}</h5>
+                        <hr/>
+                        <ul className="list-group">
+                            <li className="list-group-item">description:{jobSum.description}</li>
+                            <li className="list-group-item">category:{jobSum.category}</li>
+                            <li className="list-group-item">payRate:{jobSum.payRate}</li>
+                            <li className="list-group-item">workHours:{jobSum.workHours}</li>
+                            <li className="list-group-item">expectCompTime:{jobSum.expectCompTime}</li>
+                        </ul>
+                    </div>
+                </div>
+            )
         }
         
         componentDidMount(){
@@ -58,12 +95,14 @@ class PostNewJob extends Component {
            
              <div className="row post-new-job">
                 <div className="col-xs-12 text-center">
-                    <form>
+                    
                         <JobDetails key={this.state.quesIdx} detail={this.state.jobQuesProps[this.state.quesKey]}
                                     nextQuesHandler={this.nextQuesHandler} quesKey={this.state.quesKey}
                                     categories={this.state.quesKey==='category' ? this.props.jobQuestions.jobCategories:null}
-                                    />
-                    </form>
+                                    inputHandler={this.inputHandler}/>
+                        
+                        {this.state.newJobPostSum.screen =='false' ? this.renderJobSummary() : null }
+                    
                 </div>
              </div>
         );
